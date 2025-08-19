@@ -60,44 +60,50 @@ const login = async (req, res) => {
         if (!user) {
             return res.status(401).json({
                 success: false,
-                message: "User doesn't exit"
+                message: "User doesn't exist"
             })
         }
 
         const matchPass = await bcryptjs.compare(password, user.password)
         if (!matchPass) {
-            return res.status(501).json({
+            return res.status(401).json({
                 success: false,
                 message: "Incorrect Password !!!"
             })
         }
 
-        const tokenData = {
-            userId: user._id
-        }
+        const tokenData = { userId: user._id };
 
         const token = jwt.sign(tokenData, process.env.SECRET_KEY, { expiresIn: "1d" });
 
-        return res.status(201).cookie("token", token, { expiresIn: "1d", httpOnly: true }).json({
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production", // true when deployed
+            sameSite: "none", // important for cross-domain cookies
+            maxAge: 24 * 60 * 60 * 1000 // 1 day
+        });
+
+        return res.status(200).json({
             success: true,
             message: `Welcome back ${user.name}`,
-            user : {
-                userId : user._id,
-                email : user.email,
-                name : user.name
+            user: {
+                userId: user._id,
+                email: user.email,
+                name: user.name
             },
-            token,
-        })
+            token
+        });
     }
     catch (error) {
-        console.log(error)
-        return res.status(401).json({
+        console.log(error);
+        return res.status(500).json({
             success: false,
-            message: "Error"
+            message: "Error while logging in"
         })
     }
-}
+};
 
 
 
-export {register, login} 
+
+export { register, login } 
