@@ -37,7 +37,8 @@ app.use(express.urlencoded({
 app.use(cookieParser())
 // app.use(cors())
 const corsOption = {
-    origin: ["http://localhost:5173", "http://localhost:5174"],
+    // origin: ["http://localhost:5173", "http://localhost:5174"],
+    origin: "https://manpower-service-supply-rollback-cc.vercel.app",
     credentials: true,
 }
 app.use(cors(corsOption))

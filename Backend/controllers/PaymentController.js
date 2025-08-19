@@ -33,7 +33,7 @@ export const paymentVerification = async (req, res) => {
 
     const isAuthentic = expectedSignature === razorpay_signature
     if(isAuthentic){
-        return res.redirect(`http://localhost:5173/paymentSuccess?reference=${razorpay_payment_id}`)
+        return res.redirect(`https://manpower-service-supply-rollback-cc.vercel.app/paymentSuccess?reference=${razorpay_payment_id}`)
     }
     else{
         res.status(404).json({
