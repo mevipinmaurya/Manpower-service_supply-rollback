@@ -49,7 +49,7 @@ const CartItems = () => {
             name: 'Manpower Service Supply',
             description: 'Manpower Service Supply Razorpay Integration',
             order_id: order.id,
-            callback_url: 'http://localhost:3000/api/v1/user/payment/verification', // success URL
+            callback_url: 'https://manpower-service-supply-rollback-cc.vercel.app/api/v1/user/payment/verification', // success URL
             prefill: {
                 name: 'Vipin Maurya',
                 email: 'vipinblogpsot@gmail.com',
