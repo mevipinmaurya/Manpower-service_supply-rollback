@@ -10,51 +10,47 @@ import cartRouter from './routes/CartRouters.js';
 
 import Razorpay from 'razorpay'
 import paymentRouter from './routes/PaymentRouter.js';
-const app = express();
-
-export const instance = new Razorpay({
-    key_id: process.env.RAZORPAY_API_KEY,
-    key_secret: process.env.RAZORPAY_API_SECRET
-})
-
-// app.post("/payment/process", processPayment)
-// app.route("/payment/process").post(processPayment)
-
 
 dotenv.config({
     path: ".env"
-})
-const port = process.env.PORT || 4000
+});
+
+const app = express();
+
+// Razorpay Instance
+export const instance = new Razorpay({
+    key_id: process.env.RAZORPAY_API_KEY,
+    key_secret: process.env.RAZORPAY_API_SECRET
+});
 
 // Database Connections
 databaseConnection();
 
 // Middlewares
-app.use(express.json())
-app.use(express.urlencoded({
-    extended: true
-}))
-app.use(cookieParser())
-// app.use(cors())
-const corsOption = {
-    // origin: ["http://localhost:5173", "http://localhost:5174"],
-    origin: "https://manpower-service-supply-rollback-cc.vercel.app",
-    credentials: true,
-}
-app.use(cors(corsOption))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
+const corsOption = {
+    origin: [
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "https://manpower-service-supply-rollback-cc.vercel.app"
+    ],
+    credentials: true,
+};
+app.use(cors(corsOption));
 
 // API Endpoints
-app.use("/api/v1/user", userRouter)
-app.use("/api/v1/user", blogRouter)
-app.use("/api/v1/user", serviceRouter)
-app.use("/api/v1/user", cartRouter)
-app.use("/api/v1/user", paymentRouter)
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/blog", blogRouter);
+app.use("/api/v1/service", serviceRouter);
+app.use("/api/v1/cart", cartRouter);
+app.use("/api/v1/payment", paymentRouter);
 
+// Root endpoint
 app.get("/", (req, res) => {
     res.send("I am root");
-})
+});
 
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-})
+export default app;
