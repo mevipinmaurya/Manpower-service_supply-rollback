@@ -3,6 +3,7 @@ import electrician from "../assets/electrician.jpg";
 import cleaner from "../assets/cleaner.jpg";
 import plumber from "../assets/plumber.jpg";
 import mechanic from "../assets/mechanic.png";
+import { Link } from 'react-router-dom';
 
 const services = [
     { id: 1, img: electrician, title: "Electrician", description: "Expert electrical services for safe and efficient systems." },
@@ -39,9 +40,11 @@ const ServicesHome = () => {
                         <p className="text-center text-gray-600 mt-2 text-sm leading-tight">{service.description}</p>
 
                         {/* Learn More Button */}
-                        <button className="mt-4 px-4 py-2 text-sm bg-[#6E42E5] text-white rounded-full transition-all duration-300 hover:bg-[#6E42E5] cursor-pointer">
-                            Learn More
-                        </button>
+                        <Link to={'/blog'}>
+                            <button className="mt-4 px-4 py-2 text-sm bg-[#6E42E5] text-white rounded-full transition-all duration-300 hover:bg-[#6E42E5] cursor-pointer">
+                                Learn More
+                            </button>
+                        </Link>
                     </div>
                 ))}
             </div>

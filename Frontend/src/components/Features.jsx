@@ -3,6 +3,7 @@ import electrician from "../assets/electrician.jpg";
 import cleaner from "../assets/cleaner.jpg";
 import mechanic from "../assets/mechanic.png";
 import plumber from "../assets/plumber.jpg";
+import { Link } from "react-router-dom";
 
 const features = [
     { id: 1, img: electrician, title: "Skilled & Trained Workforce", description: "Access a pool of qualified professionals tailored to your industry needs." },
@@ -46,9 +47,10 @@ const Features = () => {
                         <p className="text-center text-gray-600 mt-2 text-sm leading-relaxed">{feature.description}</p>
 
                         {/* CTA Button */}
-                        <button className="mt-5 px-5 py-2 bg-[#6E42E5] text-white text-sm font-semibold rounded-full shadow-md transition-all duration-300 ease-in-out hover:bg-[#6E42E5] cursor-pointer mx-auto">
-                            Learn More
-                        </button>
+                        <Link to={'/blog'}>
+                            <button className="mt-5 px-5 py-2 bg-[#6E42E5] text-white text-sm font-semibold rounded-full shadow-md transition-all duration-300 ease-in-out hover:bg-[#6E42E5] cursor-pointer mx-auto">
+                                Learn More
+                            </button></Link>
                     </div>
                 ))}
             </div>
