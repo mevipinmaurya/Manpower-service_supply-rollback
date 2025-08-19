@@ -43,10 +43,10 @@ app.use(cors(corsOption));
 
 // API Endpoints
 app.use("/api/v1/user", userRouter);
-app.use("/api/v1/blog", blogRouter);
-app.use("/api/v1/service", serviceRouter);
-app.use("/api/v1/cart", cartRouter);
-app.use("/api/v1/payment", paymentRouter);
+app.use("/api/v1/user", blogRouter);
+app.use("/api/v1/user", serviceRouter);
+app.use("/api/v1/user", cartRouter);
+app.use("/api/v1/user", paymentRouter);
 
 // Root endpoint
 app.get("/", (req, res) => {
